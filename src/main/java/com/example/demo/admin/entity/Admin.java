@@ -31,11 +31,8 @@ public class Admin {
 
     public static Admin createAdmin(AdminDto dto) {
         return Admin.builder()
-                .id(dto.getId())
                 .username(dto.getUsername())
                 .password(dto.getPassword())
-                .role(dto.getRole())
-                .created_at(dto.getCreated_at())
                 .build();
     }
 }

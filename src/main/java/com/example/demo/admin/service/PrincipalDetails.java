@@ -1,6 +1,8 @@
 package com.example.demo.admin.service;
 
 import com.example.demo.admin.entity.Admin;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,13 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class AdminDetails implements UserDetails {
+@Getter
+@RequiredArgsConstructor
+public class PrincipalDetails implements UserDetails {
 
     private final Admin admin;
-
-    public AdminDetails(Admin admin) {
-        this.admin = admin;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

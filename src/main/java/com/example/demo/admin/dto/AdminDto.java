@@ -12,11 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class AdminDto {
-    private Long id;
     private String username;
     private String password;
-    private String role;
-    private LocalDateTime created_at;
-
-
 }

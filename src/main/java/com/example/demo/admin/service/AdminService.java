@@ -5,34 +5,29 @@ import com.example.demo.admin.entity.Admin;
 import com.example.demo.admin.repository.AdminRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-public class AdminDetailsService implements UserDetailsService {
+public class AdminService {
     private final AdminRepository adminRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Admin admin = adminRepository.findByUsername(username);
-        if (admin == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new AdminDetails(admin);
-    }
     @Transactional
-    public void joinAdmin(AdminDto dto) {
+    public void join(AdminDto dto) {
         Admin admin = Admin.createAdmin(dto);
         String password = admin.getPassword();
         String enPassword = bCryptPasswordEncoder.encode(password);
         admin.setPassword(enPassword);
-        admin.setRole("ADMIN");
+        admin.setRole("ROLE_MANAGER");
         adminRepository.save(admin);
     }
 
+    public List<Admin> managers() {
+        return adminRepository.findAll();
+    }
 }
