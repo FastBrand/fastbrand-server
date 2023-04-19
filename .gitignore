@@ -27,6 +27,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 **/application-local.properties
+**/analytics/capstone-384211-b0839a23314c.json
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

@@ -13,9 +13,9 @@ public class PersonalDto {
     private String name_kor;
     private String name_eng;
     private String ssn;
-    private String email;
-    private String mobile;
-    private String phone;
+    private String personalEmail;
+    private String personalMobile;
+    private String personalPhone;
     private String address;
     private String detail;
     private String zipcode;
@@ -29,9 +29,9 @@ public class PersonalDto {
                 .name_kor(personal.getName_kor())
                 .name_eng(personal.getName_eng())
                 .ssn(personal.getSsn())
-                .email(personal.getEmail())
-                .mobile(personal.getMobile())
-                .phone(personal.getPhone())
+                .personalEmail(personal.getPersonalEmail())
+                .personalMobile(personal.getPersonalMobile())
+                .personalPhone(personal.getPersonalPhone())
                 .address(personal.getAddress())
                 .detail(personal.getDetail())
                 .zipcode(personal.getZipcode())

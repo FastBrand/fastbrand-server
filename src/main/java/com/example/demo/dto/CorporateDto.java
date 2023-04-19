@@ -14,11 +14,11 @@ public class CorporateDto {
     private String name_eng;
     private String brn;
     private String crn;
-    private String name;
+    private String corporateName;
     private String ssn;
-    private String mobile;
-    private String phone;
-    private String email;
+    private String corporateMobile;
+    private String corporatePhone;
+    private String corporateEmail;
     private String seal;
     private String address;
     private String detail;
@@ -33,11 +33,11 @@ public class CorporateDto {
                 .name_eng(corporate.getName_eng())
                 .brn(corporate.getBrn())
                 .crn(corporate.getCrn())
-                .name(corporate.getName())
+                .corporateName(corporate.getCorporateName())
                 .ssn(corporate.getSsn())
-                .mobile(corporate.getMobile())
-                .phone(corporate.getPhone())
-                .email(corporate.getEmail())
+                .corporateMobile(corporate.getCorporateMobile())
+                .corporatePhone(corporate.getCorporatePhone())
+                .corporateEmail(corporate.getCorporateEmail())
                 .seal(corporate.getSeal())
                 .address(corporate.getAddress())
                 .detail(corporate.getDetail())

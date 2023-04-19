@@ -38,22 +38,22 @@ public class Corporate {
     @Column
     @Size(max=64)
     @NotNull
-    private String name;
+    private String corporateName;
     @Column
     @Size(max=64)
     @NotNull
     private String ssn;
     @Column
     @Size(max=64)
-    private String mobile;
+    private String corporateMobile;
     @Column
     @Size(max=64)
-    private String phone;
+    private String corporatePhone;
     @Column
     @Size(max=128)
     @NotNull
     @Email
-    private String email;
+    private String corporateEmail;
     @Column
     @Size(max=256)
     private String seal;
@@ -83,11 +83,11 @@ public class Corporate {
                 .name_eng(dto.getName_eng())
                 .brn(dto.getBrn())
                 .crn(dto.getCrn())
-                .name(dto.getName())
+                .corporateName(dto.getCorporateName())
                 .ssn(dto.getSsn())
-                .mobile(dto.getMobile())
-                .phone(dto.getPhone())
-                .email(dto.getEmail())
+                .corporateMobile(dto.getCorporateMobile())
+                .corporatePhone(dto.getCorporatePhone())
+                .corporateEmail(dto.getCorporateEmail())
                 .seal(dto.getSeal())
                 .address(dto.getAddress())
                 .detail(dto.getDetail())
@@ -106,16 +106,16 @@ public class Corporate {
             this.brn = corporate.getBrn();
         if(corporate.getCrn() != null)
             this.crn = corporate.getCrn();
-        if(corporate.getName() != null)
-            this.name = corporate.getName();
+        if(corporate.getCorporateName() != null)
+            this.corporateName = corporate.getCorporateName();
         if(corporate.getSsn() != null)
             this.ssn = corporate.getSsn();
-        if(corporate.getMobile() != null)
-            this.mobile = corporate.getMobile();
-        if(corporate.getPhone() != null)
-            this.phone = corporate.getPhone();
-        if(corporate.getEmail() != null)
-            this.email = corporate.getEmail();
+        if(corporate.getCorporateMobile() != null)
+            this.corporateMobile = corporate.getCorporateMobile();
+        if(corporate.getCorporatePhone() != null)
+            this.corporatePhone = corporate.getCorporatePhone();
+        if(corporate.getCorporateEmail() != null)
+            this.corporateEmail = corporate.getCorporateEmail();
         if(corporate.getSeal() != null)
             this.seal = corporate.getSeal();
         if(corporate.getAddress() != null)

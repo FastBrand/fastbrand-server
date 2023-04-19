@@ -35,14 +35,14 @@ public class Personal {
     @Size(max=128)
     @NotNull
     @Email
-    private String email;
+    private String personalEmail;
     @Column
     @Size(max=64)
     @NotNull
-    private String mobile;
+    private String personalMobile;
     @Column
     @Size(max=64)
-    private String phone;
+    private String personalPhone;
     @Column
     @Size(max=128)
     @NotNull
@@ -67,9 +67,9 @@ public class Personal {
                 .name_kor(dto.getName_kor())
                 .name_eng(dto.getName_eng())
                 .ssn(dto.getSsn())
-                .email(dto.getEmail())
-                .mobile(dto.getMobile())
-                .phone(dto.getPhone())
+                .personalEmail(dto.getPersonalEmail())
+                .personalMobile(dto.getPersonalMobile())
+                .personalPhone(dto.getPersonalPhone())
                 .address(dto.getAddress())
                 .detail(dto.getDetail())
                 .zipcode(dto.getZipcode())
@@ -84,12 +84,12 @@ public class Personal {
             this.name_eng = personal.getName_eng();
         if(personal.getSsn() != null)
             this.ssn = personal.getSsn();
-        if(personal.getEmail() != null)
-            this.email = personal.getEmail();
-        if(personal.getMobile() != null)
-            this.mobile = personal.getMobile();
-        if(personal.getPhone() != null)
-            this.phone = personal.getPhone();
+        if(personal.getPersonalEmail() != null)
+            this.personalEmail = personal.getPersonalEmail();
+        if(personal.getPersonalMobile() != null)
+            this.personalMobile = personal.getPersonalMobile();
+        if(personal.getPersonalPhone() != null)
+            this.personalPhone = personal.getPersonalPhone();
         if(personal.getAddress() != null)
             this.address = personal.getAddress();
         if(personal.getDetail() != null)
