@@ -11,6 +11,7 @@ import com.google.api.services.analyticsreporting.v4.model.*;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
@@ -23,9 +24,12 @@ import java.util.List;
 
 @Service
 public class AnalyticsService {
-    private static final String APPLICATION_NAME = "Capstone Analytics Reporting";
-    private static final String KEY_FILE_LOCATION = System.getProperty("user.dir") + "/src/main/resources/analytics/capstone-384211-b0839a23314c.json";
-    private static final String VIEW_ID = "288774560";
+    @Value("${application.name}")
+    private String APPLICATION_NAME;
+    @Value("${key.file.location}")
+    private String KEY_FILE_LOCATION;
+    @Value("${view.id}")
+    private String VIEW_ID;
 
     private AnalyticsReporting analyticsReporting;
 
