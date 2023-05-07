@@ -4,7 +4,6 @@ import com.example.demo.admin.dto.AdminDto;
 import com.example.demo.admin.entity.Admin;
 import com.example.demo.admin.service.AdminService;
 import com.example.demo.admin.service.AnalyticsService;
-import com.example.demo.admin.service.PrincipalDetailsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,12 +39,21 @@ public class AdminController {
         return "logout";
     }
 
-    @GetMapping("/week")
+    @GetMapping("/dashboard")
     public List<Long> getVisitor() throws GeneralSecurityException, IOException {
         LocalDate today = LocalDate.now();
         LocalDate lastWeek = today.minusWeeks(1);
-        String startDate = lastWeek.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        String endDate = today.plusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
-        return analyticsService.getVisitorCount(startDate, endDate);
+        List<Long> dates = new ArrayList<>();
+        for (LocalDate date = lastWeek; !date.isAfter(today.minusDays(1)); date = date.plusDays(1)) {
+            String startDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            String endDate = date.plusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
+            List<Long> temp = analyticsService.getVisitorCount(startDate, endDate);
+            if(!temp.isEmpty())
+                dates.add(temp.get(0));
+            else
+                dates.add(0L);
+        }
+        return dates;
     }
+
 }

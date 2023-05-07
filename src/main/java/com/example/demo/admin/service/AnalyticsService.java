@@ -55,9 +55,7 @@ public class AnalyticsService {
         dateRange.setEndDate(endDate);
 
         ReportRequest reportRequest = new ReportRequest().setViewId(VIEW_ID).setDateRanges(Collections.singletonList(dateRange)).setMetrics(metrics);
-
         GetReportsRequest getReport = new GetReportsRequest().setReportRequests(Collections.singletonList(reportRequest));
-
         GetReportsResponse response = analyticsReporting.reports().batchGet(getReport).execute();
 
         List<Report> reportList = response.getReports();
