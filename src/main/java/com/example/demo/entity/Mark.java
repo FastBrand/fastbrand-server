@@ -40,19 +40,22 @@ public class Mark {
     private String poc;
     @Column
     @Size(max=256)
-    @NotNull
     private String country;
     @Column
     @Size(max=256)
-    @NotNull
     private String madrid;
     @Column
     @Size(max=256)
-    @NotNull
     private String direct;
     @Column
     @Size(max=64)
     private String status;
+    @OneToOne(mappedBy = "mark")
+    private Corporate corporate;
+    @OneToOne(mappedBy = "mark")
+    private Personal personal;
+    @OneToOne(mappedBy = "mark")
+    private User user;
 
     public static Mark createMark(MarkDto dto) {
         return Mark.builder()

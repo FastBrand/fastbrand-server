@@ -26,6 +26,14 @@ public class UserServiceImpl implements UserService {
                 .map(UserDto::createUserDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UserDto oneUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
+        return UserDto.createUserDto(user);
+    }
+
     @Override
     @Transactional
     public UserDto create(Long mid, UserDto dto) {

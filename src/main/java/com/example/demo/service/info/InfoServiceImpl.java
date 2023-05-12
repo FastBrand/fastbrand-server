@@ -1,6 +1,8 @@
 package com.example.demo.service.info;
 
 import com.example.demo.dto.*;
+import com.example.demo.entity.Mark;
+import com.example.demo.repository.MarkRepository;
 import com.example.demo.service.corporate.CorporateServiceImpl;
 import com.example.demo.service.mark.MarkServiceImpl;
 import com.example.demo.service.personal.PersonalServiceImpl;
@@ -21,6 +23,7 @@ public class InfoServiceImpl implements InfoService{
     private final PersonalServiceImpl personalService;
     private final CorporateServiceImpl corporateService;
     private final UserServiceImpl userService;
+    private final MarkRepository markRepository;
 
     @Override
     public List<InfoDto> info() {
@@ -70,6 +73,34 @@ public class InfoServiceImpl implements InfoService{
         }
 
         return infoDtoList;
+    }
+
+    @Override
+    public InfoDto inf(Long id) {
+        Mark mark = markRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
+        CorporateDto corporateDto;
+        PersonalDto personalDto;
+        InfoDto infoDto;
+        MarkDto markDto = MarkDto.createMarkDto(mark);
+        UserDto userDto = userService.oneUser(mark.getUser().getId());
+        if(mark.getPoc().equals("corporate")) {
+            corporateDto = corporateService.oneCorporate(mark.getCorporate().getId());
+            infoDto = InfoDto.builder()
+                    .mark(markDto)
+                    .corporate(corporateDto)
+                    .user(userDto)
+                    .build();
+        }
+        else {
+            personalDto = personalService.onePersonal(mark.getPersonal().getId());
+            infoDto = InfoDto.builder()
+                    .mark(markDto)
+                    .personal(personalDto)
+                    .user(userDto)
+                    .build();
+        }
+        return infoDto;
     }
 
     @Transactional

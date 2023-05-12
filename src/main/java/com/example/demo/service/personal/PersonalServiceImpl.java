@@ -27,6 +27,13 @@ public class PersonalServiceImpl implements PersonalService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public PersonalDto onePersonal(Long id) {
+        Personal personal = personalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
+        return PersonalDto.createPersonalDto(personal);
+    }
+
     @Transactional
     @Override
     public PersonalDto create(Long mid, PersonalDto dto) {

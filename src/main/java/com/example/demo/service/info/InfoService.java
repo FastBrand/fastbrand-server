@@ -10,4 +10,5 @@ public interface InfoService {
     InfoDto createCorp(InfoDto dto);
     InfoDto createPer(InfoDto dto);
     InfoDto update(InfoDto dto);
+    InfoDto inf(Long id);
 }

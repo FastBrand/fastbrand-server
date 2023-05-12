@@ -26,6 +26,10 @@ public class MainController {
     public List<InfoDto> showAllInfo() {
         return infoService.info();
     }
+    @GetMapping("/info/{id}")
+    public InfoDto showInfo(@PathVariable Long id) {
+        return infoService.inf(id);
+    }
     @GetMapping("/mark")
     public List<MarkDto> showMarks() {
         return markService.marks();

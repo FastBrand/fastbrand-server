@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface PersonalService {
     List<PersonalDto> personal();
+    PersonalDto onePersonal(Long id);
     PersonalDto create(Long mid, PersonalDto dto);
     PersonalDto update(Long id, PersonalDto dto);
     PersonalDto delete(Long id);

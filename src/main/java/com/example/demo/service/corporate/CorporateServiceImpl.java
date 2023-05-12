@@ -28,6 +28,13 @@ public class CorporateServiceImpl implements CorporateService {
     }
 
     @Override
+    public CorporateDto oneCorporate(Long id) {
+        Corporate corporate = corporateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
+        return CorporateDto.createCorporateDto(corporate);
+    }
+
+    @Override
     @Transactional
     public CorporateDto create(Long mid, CorporateDto dto) {
         Mark mark = markRepository.findById(mid)
