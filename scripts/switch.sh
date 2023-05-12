@@ -14,7 +14,7 @@ if [ ${CURRENT_PORT} -eq 8081]; then
 
   echo "set \$Service_url http:localhost:${TARGET_PORT};" | tee /home/ec2-user/service_url.inc
 
-  echo "> Noew Nginx proxies to ${TARGET_PORT}."
+  echo "> Now Nginx proxies to ${TARGET_PORT}."
 
   sudo service nginx reload
 

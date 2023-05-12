@@ -19,5 +19,5 @@
   fi
 
   nohup java -jar -Dserver.port=${TARGET_PORT} /home/ec2-user/brandnew/build/libs/* > /home/ec2-user/nohup.out 2>&1 &
-  echo "> Noew new WAS runs at ${TARGET_PORT}."
+  echo "> Now new WAS runs at ${TARGET_PORT}."
   exit 0

@@ -3,6 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/brandnew
+    overwrite: yes
 
   - permissions:
       object: /
@@ -12,7 +13,13 @@ files:
       mode: 755
 
   - hooks:
+      BeforeInstall:
+        - location: scripts/deploy-before.sh
+          runas: ec2-user
       ApplicationStart:
+        - location: scripts/deploy.sh
+          timeout: 60
+          runas: ec2-user
         - location: scripts/run_new_was.sh
           timeout: 180
           runas: ec2-user
