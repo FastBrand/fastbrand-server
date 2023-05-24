@@ -17,6 +17,7 @@ public class UserDto {
     private String mobile;
     private String phone;
     private String acc_num;
+    private String price;
     private LocalDateTime created_at;
 
     public static UserDto createUserDto(User user) {
@@ -28,6 +29,7 @@ public class UserDto {
                 .mobile(user.getMobile())
                 .phone(user.getPhone())
                 .acc_num(user.getAcc_num())
+                .price(user.getPrice())
                 .created_at(user.getCreated_at())
                 .build();
     }

@@ -45,6 +45,9 @@ public class User {
     @NotNull
     private String acc_num;
     @Column
+    @Size(max=64)
+    private String price;
+    @Column
     @CreatedDate
     private LocalDateTime created_at;
 
@@ -57,6 +60,8 @@ public class User {
             this.mobile = user.getMobile();
         if(user.getPhone() != null)
             this.phone = user.getPhone();
+        if(user.getPrice() != null)
+            this.price = user.getPrice();
         if(user.getAcc_num() != null)
             this.acc_num = user.getAcc_num();
     }
@@ -70,6 +75,7 @@ public class User {
                 .mobile(dto.getMobile())
                 .phone(dto.getPhone())
                 .acc_num(dto.getAcc_num())
+                .price(dto.getPrice())
                 .created_at(dto.getCreated_at())
                 .build();
     }

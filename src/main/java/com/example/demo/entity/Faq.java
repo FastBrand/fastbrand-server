@@ -20,7 +20,7 @@ public class Faq {
     @NotNull
     private String title;
     @Column
-    @Size(max=512)
+    @Size(max=1024)
     @NotNull
     private String content;
 
