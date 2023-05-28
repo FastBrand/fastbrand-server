@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -17,7 +20,7 @@ public class Corporate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mid")
+    @JoinColumn(name = "mark_id")
     private Mark mark;
     @Column
     @Size(max=64)
@@ -55,25 +58,20 @@ public class Corporate {
     @Email
     private String corporateEmail;
     @Column
-    @Size(max=256)
-    private String seal;
-    @Column
     @Size(max=128)
-    @NotNull
     private String address;
     @Column
     @Size(max=128)
-    @NotNull
     private String detail;
     @Column
     @Size(max=64)
-    @NotNull
     private String zipcode;
     @Column
     @Size(max=16)
     @NotNull
     private String agreement;
-
+    @OneToMany(mappedBy = "corporate", cascade = CascadeType.ALL)
+    private List<Seal> seals = new ArrayList<>();
 
     public static Corporate createCorporate(CorporateDto dto, Mark mark) {
         return Corporate.builder()
@@ -88,7 +86,6 @@ public class Corporate {
                 .corporateMobile(dto.getCorporateMobile())
                 .corporatePhone(dto.getCorporatePhone())
                 .corporateEmail(dto.getCorporateEmail())
-                .seal(dto.getSeal())
                 .address(dto.getAddress())
                 .detail(dto.getDetail())
                 .zipcode(dto.getZipcode())
@@ -116,8 +113,6 @@ public class Corporate {
             this.corporatePhone = corporate.getCorporatePhone();
         if(corporate.getCorporateEmail() != null)
             this.corporateEmail = corporate.getCorporateEmail();
-        if(corporate.getSeal() != null)
-            this.seal = corporate.getSeal();
         if(corporate.getAddress() != null)
             this.address = corporate.getAddress();
         if(corporate.getDetail() != null)

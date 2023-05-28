@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 public class CorporateDto {
     private Long id;
-    private Long mid;
+    private Long mark_id;
     private String name_kor;
     private String name_eng;
     private String brn;
@@ -19,7 +19,6 @@ public class CorporateDto {
     private String corporateMobile;
     private String corporatePhone;
     private String corporateEmail;
-    private String seal;
     private String address;
     private String detail;
     private String zipcode;
@@ -28,7 +27,7 @@ public class CorporateDto {
     public static CorporateDto createCorporateDto(Corporate corporate) {
         return CorporateDto.builder()
                 .id(corporate.getId())
-                .mid(corporate.getMark().getId())
+                .mark_id(corporate.getMark().getId())
                 .name_kor(corporate.getName_kor())
                 .name_eng(corporate.getName_eng())
                 .brn(corporate.getBrn())
@@ -38,7 +37,6 @@ public class CorporateDto {
                 .corporateMobile(corporate.getCorporateMobile())
                 .corporatePhone(corporate.getCorporatePhone())
                 .corporateEmail(corporate.getCorporateEmail())
-                .seal(corporate.getSeal())
                 .address(corporate.getAddress())
                 .detail(corporate.getDetail())
                 .zipcode(corporate.getZipcode())

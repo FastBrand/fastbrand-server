@@ -11,7 +11,6 @@ public class MarkDto {
     private Long id;
     private String brand_name;
     private String description;
-    private String image;
     private String sector;
     private String type;
     private String poc;
@@ -26,7 +25,6 @@ public class MarkDto {
                 .id(mark.getId())
                 .brand_name(mark.getBrand_name())
                 .description(mark.getDescription())
-                .image(mark.getImage())
                 .sector(mark.getSector())
                 .type(mark.getType())
                 .poc(mark.getPoc())

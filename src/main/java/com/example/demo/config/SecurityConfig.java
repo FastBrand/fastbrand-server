@@ -33,8 +33,8 @@ public class SecurityConfig {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), adminRepository))
                 .authorizeHttpRequests()
-                .requestMatchers("/api/manage/**").hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
-                .requestMatchers("/api/admin/**").hasRole("ROLE_ADMIN")
+                .requestMatchers("/api/manage/**").hasRole("MANAGER")
+                .requestMatchers("/api/admin/**").hasRole("MANAGER")
                 .anyRequest().permitAll()
                 .and().build();
     }

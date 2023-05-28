@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 public class PersonalDto {
     private Long id;
-    private Long mid;
+    private Long mark_id;
     private String name_kor;
     private String name_eng;
     private String ssn;
@@ -25,7 +25,7 @@ public class PersonalDto {
     public static PersonalDto createPersonalDto(Personal personal) {
         return PersonalDto.builder()
                 .id(personal.getId())
-                .mid(personal.getMark().getId())
+                .mark_id(personal.getMark().getId())
                 .name_kor(personal.getName_kor())
                 .name_eng(personal.getName_eng())
                 .ssn(personal.getSsn())

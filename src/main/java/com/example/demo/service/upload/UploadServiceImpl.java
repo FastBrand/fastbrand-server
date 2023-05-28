@@ -1,10 +1,10 @@
-package com.example.demo.service.File;
+package com.example.demo.service.upload;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.demo.entity.Mark;
 import com.example.demo.repository.MarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,16 +15,17 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class FileServiceImpl implements FileService {
+public class UploadServiceImpl implements UploadService {
 
     @Value("${cloud.aws.s3.bucket}")
-    private String S3Bucket;
+    private String bucket;
     private final AmazonS3 amazonS3;
-    private final MarkRepository markRepository;
-    @Override
-    public String uploadFile(Long id, MultipartFile file) throws IOException {
 
-        String originalName = "img/" + file.getOriginalFilename();
+    @Override
+    public String upload(Long id, MultipartFile file, String fileType) throws IOException {
+
+        String originalName = fileType.equals("image") ? "marks/" + file.getOriginalFilename()
+                : "seals/" + file.getOriginalFilename();
         long size = file.getSize();
 
         ObjectMetadata objectMetaData = new ObjectMetadata();
@@ -32,16 +33,18 @@ public class FileServiceImpl implements FileService {
         objectMetaData.setContentLength(size);
 
         amazonS3.putObject(
-                new PutObjectRequest(S3Bucket, originalName, file.getInputStream(), objectMetaData)
+                new PutObjectRequest(bucket, originalName, file.getInputStream(), objectMetaData)
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
 
-        String imageUrl = amazonS3.getUrl(S3Bucket, originalName).toString();
-
-        Mark mark = markRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("error"));
-        mark.setImage(imageUrl);
-        markRepository.save(mark);
+        String imageUrl = amazonS3.getUrl(bucket, originalName).toString();
 
         return imageUrl;
+    }
+
+    @Override
+    public void deleteFile(String key) {
+        DeleteObjectRequest request = new DeleteObjectRequest(bucket, key);
+        amazonS3.deleteObject(request);
     }
 }

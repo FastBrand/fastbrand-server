@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 public class UserDto {
     private Long id;
-    private Long mid;
+    private Long mark_id;
     private String name;
     private String email;
     private String mobile;
@@ -23,7 +23,7 @@ public class UserDto {
     public static UserDto createUserDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
-                .mid(user.getMark().getId())
+                .mark_id(user.getMark().getId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .mobile(user.getMobile())

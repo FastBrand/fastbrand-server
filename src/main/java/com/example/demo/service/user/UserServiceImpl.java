@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto create(Long mid, UserDto dto) {
-        Mark mark = markRepository.findById(mid)
+    public UserDto create(Long mark_id, UserDto dto) {
+        Mark mark = markRepository.findById(mark_id)
                 .orElseThrow(() -> new IllegalArgumentException("error"));
         User user = User.createUser(dto, mark);
         User created = userRepository.save(user);

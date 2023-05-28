@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -26,9 +29,6 @@ public class Mark {
     private String description;
     @Column
     @Size(max=256)
-    private String image;
-    @Column
-    @Size(max=256)
     @NotNull
     private String sector;
     @Column
@@ -41,12 +41,15 @@ public class Mark {
     private String poc;
     @Column
     @Size(max=256)
+    @NotNull
     private String country;
     @Column
     @Size(max=256)
+    @NotNull
     private String madrid;
     @Column
     @Size(max=256)
+    @NotNull
     private String direct;
     @Column
     @Size(max=64)
@@ -57,13 +60,14 @@ public class Mark {
     private Personal personal;
     @OneToOne(mappedBy = "mark")
     private User user;
+    @OneToMany(mappedBy = "mark", cascade = CascadeType.ALL)
+    private List<Image> images = new ArrayList<>();
 
     public static Mark createMark(MarkDto dto) {
         return Mark.builder()
                 .id(dto.getId())
                 .brand_name(dto.getBrand_name())
                 .description(dto.getDescription())
-                .image(dto.getImage())
                 .sector(dto.getSector())
                 .type(dto.getType())
                 .poc(dto.getPoc())
@@ -79,8 +83,6 @@ public class Mark {
             this.brand_name = mark.getBrand_name();
         if(mark.getDescription() != null)
             this.description = mark.getDescription();
-        if(mark.getImage() != null)
-            this.image = mark.getImage();
         if(mark.getSector() != null)
             this.sector = mark.getSector();
         if(mark.getType() != null)

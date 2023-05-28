@@ -6,7 +6,7 @@ import java.util.List;
 public interface CorporateService {
     List<CorporateDto> corporate();
     CorporateDto oneCorporate(Long id);
-    CorporateDto create(Long mid, CorporateDto dto);
+    CorporateDto create(Long mark_id, CorporateDto dto);
     CorporateDto update(Long id, CorporateDto dto);
     CorporateDto delete(Long id);
 }

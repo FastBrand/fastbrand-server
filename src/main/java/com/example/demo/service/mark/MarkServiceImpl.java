@@ -1,14 +1,13 @@
 package com.example.demo.service.mark;
 
 import com.example.demo.dto.MarkDto;
-import com.example.demo.entity.Corporate;
-import com.example.demo.entity.Mark;
-import com.example.demo.entity.Personal;
-import com.example.demo.entity.User;
+import com.example.demo.entity.*;
 import com.example.demo.repository.CorporateRepository;
 import com.example.demo.repository.MarkRepository;
 import com.example.demo.repository.PersonalRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.image.ImageServiceImpl;
+import com.example.demo.service.seal.SealServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +24,8 @@ public class MarkServiceImpl implements MarkService {
     private final CorporateRepository corporateRepository;
     private final PersonalRepository personalRepository;
     private final UserRepository userRepository;
+    private final ImageServiceImpl imageService;
+    private final SealServiceImpl sealService;
 
     @Override
     public List<MarkDto> marks() {
@@ -38,6 +39,11 @@ public class MarkServiceImpl implements MarkService {
         Mark mark = markRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("error"));
         return MarkDto.createMarkDto(mark);
+    }
+
+    public Mark _mark(Long id) {
+        return markRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
     }
 
     @Override
@@ -65,9 +71,15 @@ public class MarkServiceImpl implements MarkService {
     public MarkDto delete(Long id) {
         Mark target = markRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("error"));
+        List<Image> images = target.getImages();
+        if(!images.isEmpty())
+            imageService.deleteImage(images);
 
         if(target.getPoc().equals("corporate")) {
             Corporate corporate = corporateRepository.findByMark(target);
+            List<Seal> seals = corporate.getSeals();
+            if(!seals.isEmpty())
+                sealService.deleteSeal(seals);
             corporateRepository.delete(corporate);
         }
 

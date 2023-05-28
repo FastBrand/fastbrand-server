@@ -34,10 +34,15 @@ public class CorporateServiceImpl implements CorporateService {
         return CorporateDto.createCorporateDto(corporate);
     }
 
+    public Corporate _oneCorporate(Long id) {
+        return corporateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("error"));
+    }
+
     @Override
     @Transactional
-    public CorporateDto create(Long mid, CorporateDto dto) {
-        Mark mark = markRepository.findById(mid)
+    public CorporateDto create(Long mark_id, CorporateDto dto) {
+        Mark mark = markRepository.findById(mark_id)
                 .orElseThrow(() -> new IllegalArgumentException("error"));
         Corporate corporate = Corporate.createCorporate(dto, mark);
         Corporate created = corporateRepository.save(corporate);

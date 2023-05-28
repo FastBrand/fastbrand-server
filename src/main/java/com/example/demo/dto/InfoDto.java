@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
@@ -12,4 +14,6 @@ public class InfoDto {
     private PersonalDto personal;
     private CorporateDto corporate;
     private UserDto user;
+    private List<ImageDto> images;
+    private List<SealDto> seals;
 }

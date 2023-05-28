@@ -28,7 +28,7 @@ public class MainController {
     }
     @GetMapping("/info/{id}")
     public InfoDto showInfo(@PathVariable Long id) {
-        return infoService.inf(id);
+        return infoService._info(id);
     }
     @GetMapping("/mark")
     public List<MarkDto> showMarks() {

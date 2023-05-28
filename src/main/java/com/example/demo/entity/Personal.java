@@ -17,7 +17,7 @@ public class Personal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mid")
+    @JoinColumn(name = "mark_id")
     private Mark mark;
     @Column
     @Size(max=64)
@@ -45,15 +45,12 @@ public class Personal {
     private String personalPhone;
     @Column
     @Size(max=128)
-    @NotNull
     private String address;
     @Column
     @Size(max=128)
-    @NotNull
     private String detail;
     @Column
     @Size(max=64)
-    @NotNull
     private String zipcode;
     @Column
     @Size(max=16)

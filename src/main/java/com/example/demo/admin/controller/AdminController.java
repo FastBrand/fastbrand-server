@@ -39,7 +39,7 @@ public class AdminController {
         return "logout";
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/manage/dashboard")
     public List<Long> getVisitor() throws GeneralSecurityException, IOException {
         LocalDate today = LocalDate.now();
         LocalDate lastWeek = today.minusWeeks(1);
