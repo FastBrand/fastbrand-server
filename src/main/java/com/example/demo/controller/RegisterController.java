@@ -15,7 +15,7 @@ public class RegisterController {
     private final InfoServiceImpl infoService;
 
     @PostMapping("/personal")
-    public ResponseEntity<InfoDto> createAllPersonal(@RequestPart("data") InfoDto dto, @RequestPart("image") MultipartFile[] images) {
+    public ResponseEntity<InfoDto> createAllPersonal(@RequestPart("data") InfoDto dto, @RequestPart(value = "image", required = false) MultipartFile[] images) {
         InfoDto infoDto = infoService.createPer(dto, images, "image");
         return ResponseEntity.status(HttpStatus.OK).body(infoDto);
     }

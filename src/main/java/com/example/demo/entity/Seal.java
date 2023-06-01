@@ -15,16 +15,16 @@ public class Seal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    @NotNull
+
     private String originalName;
     @Column
-    @NotNull
+
     private String storedName;
     @Column
-    @NotNull
+
     private String url;
     @Column
-    @NotNull
+
     private String uuid;
     @Column
     private String fileSize;
